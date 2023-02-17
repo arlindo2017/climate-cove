@@ -16,7 +16,7 @@ var currentWeatherIconEl = document.getElementById('current-weather-icon');
 // API Key, get your key here  https://openweathermap.org/forecast5
 var openWeatherMapForecast = function () {
     var apiKey = "7d5b7e2240f4ddcf43e49911d92c7be7";
-    var apiLocUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + citySearchInput + ","+ stateSelected +",us&limit=1&appid=" + apiKey;
+    var apiLocUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + citySearchInput + ","+ stateSelected +",us&limit=1&appid=" + apiKey;
     var cityCoordinatesLat;
     var cityCoordinatesLon;
     // first API call to retrieve city details including coordinates
@@ -58,7 +58,7 @@ var openWeatherMapForecast = function () {
             var currentWeatherDate = currentWeatherData.dt;
             currentWeatherDate = (dayjs(currentWeatherDate * 1000).format('MM/DD/YYYY'));
             var currentWeatherIcon = currentWeatherData.weather[0].icon;
-            var currentWeatherIconUrl = "http://openweathermap.org/img/w/" + currentWeatherIcon+".png";
+            var currentWeatherIconUrl = "https://openweathermap.org/img/w/" + currentWeatherIcon+".png";
         
             //write to page
             currentDateEl.textContent = currentWeatherDate;
@@ -160,6 +160,10 @@ function citySearch() {
         //console.log(stateSelected);
     }  
 };
+
+function searchHistoryRender() {
+
+}
 
 openWeatherMapForecast();
 citySearchButtonEl.addEventListener('click', citySearch);
