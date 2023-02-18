@@ -12,6 +12,16 @@ var currentWindEl = document.getElementById('current-wind');
 var currentHumidityEl = document.getElementById('current-humidity');
 var currentWeatherIconEl = document.getElementById('current-weather-icon');
 
+// Spinner 
+const spinnerEl = document.getElementById('spinner');
+function showSpinner() {
+  spinnerEl.style.visibility = 'visible';
+}
+
+function hideSpinner() {
+  spinnerEl.style.visibility = 'hidden';
+}
+
 // Open Weather API Call
 // API Key, get your key here  https://openweathermap.org/forecast5
 var openWeatherMapForecast = function () {
@@ -19,6 +29,7 @@ var openWeatherMapForecast = function () {
     var apiLocUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + citySearchString +",us&limit=1&appid=" + apiKey;
     var cityCoordinatesLat;
     var cityCoordinatesLon;
+    showSpinner()
     // first API call to retrieve city details including coordinates
     fetch(apiLocUrl)
       .then(function (cityLocationResponse) {
@@ -31,6 +42,7 @@ var openWeatherMapForecast = function () {
         .then(function (cityData) {
         if (cityData.length === 0) {
             alert("City Not found");
+            hideSpinner();
             return;
         } else {
             localStorageStringToArray(); 
@@ -60,9 +72,9 @@ var openWeatherMapForecast = function () {
         
             //write to page
             currentDateEl.textContent = currentWeatherDate;
-            currentTempEl.textContent = Math.round(currentWeatherTemp) + " °";
+            currentTempEl.textContent = Math.round(currentWeatherTemp) + "°";
             currentWindEl.textContent = currentWeatherWind + " MPH";
-            currentHumidityEl.textContent = currentWeatherHumidity + " %";
+            currentHumidityEl.textContent = currentWeatherHumidity + "%";
             currentWeatherIconEl.src = currentWeatherIconUrl;
         
             var apiWeatherForecastURL = "https://api.openweathermap.org/data/2.5/forecast?lat="+ cityCoordinatesLat + "&lon=" + cityCoordinatesLon +"&units=imperial&lan=en"+"&appid=" + apiKey;
@@ -102,24 +114,25 @@ var openWeatherMapForecast = function () {
                 // 4- Create Weather Image
                 var forecastIconEl = document.createElement('img');
                 forecastIconEl.classList.add('col');
-                forecastIconEl.src = "http://openweathermap.org/img/w/" + futureWeatherIcon+".png"
+                forecastIconEl.src = "https://openweathermap.org/img/w/" + futureWeatherIcon+".png"
                 // 5 - Temp
                 var forecastTempEl = document.createElement('h2');
-                forecastTempEl.classList.add('col','display-2');
+                forecastTempEl.classList.add('col','display-6');
                 forecastTempEl.textContent = Math.round(futureWeatherTemp) + "°";
                 // 6- Wind
                 var forecastWindEl = document.createElement('div');
                 forecastWindEl.classList.add('col');
-                forecastWindEl = document.createElement('h5');
-                forecastWindEl.classList.add('col','text-muted');
+                forecastWindEl = document.createElement('h7');
+                forecastWindEl.classList.add('col');
                 forecastWindEl.textContent = "Wind: " + futureWeatherWind + " MPH"
-                forecastHumidityEl = document.createElement('h5');
-                forecastHumidityEl.classList.add('col','text-muted');
+                forecastHumidityEl = document.createElement('h7');
+                forecastHumidityEl.classList.add('col');
                 forecastHumidityEl.textContent = "Humidity: " +futureWeatherHumidity + "%";
                 // 7- Add Components to HTML
                 forecastContainerEl.append( forecastCardEl);
                 forecastCardEl.append(forecastDateEl,forecastCardBody);
                 forecastCardBody.append(forecastIconEl,forecastTempEl,forecastWindEl,forecastHumidityEl);
+                hideSpinner();
             }       
     });
 };
@@ -127,28 +140,29 @@ var openWeatherMapForecast = function () {
 // Search Input and History
 var searchHistoryEl = document.getElementById('city-search-history');
 var stateSelected;
-var citySearchString = 'Miami,FL';
+var citySearchString = 'New York,NY';
 var citySearchHistoryString;
 var citySearchHistoryArray = [];
 
 function localStorageStringToArray() {
-    citySearchHistoryString = localStorage.getItem('citysearch');
-    if (citySearchHistoryString === null) {
-        citySearchHistoryArray.push(citySearchString);
-        localStorage.setItem("citysearch", JSON.stringify(citySearchHistoryArray));
-        searchHistoryRender();
-    }else if (citySearchHistoryArray.length >= 5)  {
-        citySearchHistoryArray.pop();
-        citySearchHistoryArray.unshift(citySearchString);
-        localStorage.setItem("citysearch", JSON.stringify(citySearchHistoryArray));
-        searchHistoryRender();
-    }
-    else {
-        citySearchHistoryArray.unshift(citySearchString);
-        localStorage.setItem("citysearch", JSON.stringify(citySearchHistoryArray));
-        searchHistoryRender();
-    }  
+  citySearchHistoryString = localStorage.getItem('citysearch');
+  if (citySearchHistoryString === null) {
+      citySearchHistoryArray.push(citySearchString);
+      localStorage.setItem("citysearch", JSON.stringify(citySearchHistoryArray));
+      searchHistoryRender();
+  } else {
+      citySearchHistoryArray = JSON.parse(citySearchHistoryString);
+      if (!citySearchHistoryArray.includes(citySearchString)) {
+          if (citySearchHistoryArray.length >= 5) {
+              citySearchHistoryArray.pop();
+          }
+          citySearchHistoryArray.unshift(citySearchString);
+          localStorage.setItem("citysearch", JSON.stringify(citySearchHistoryArray));
+          searchHistoryRender();
+      }
+  }  
 }
+
    
 function citySearch() {
     stateSelected = stateSelectorEl.value.trim();
@@ -173,7 +187,7 @@ function searchHistoryRender() {
     searchHistoryEl.innerHTML = '';
    for (let i = 0; i < citySearchHistoryArray.length; i++) {
     let searchHistory = document.createElement('li');
-    searchHistory.classList.add('btn', 'list-group-item');
+    searchHistory.classList.add('btn', 'list-group-item','btn-outline-light');
     searchHistory.textContent = citySearchHistoryArray[i];
     searchHistoryEl.append(searchHistory);
    }
@@ -193,6 +207,7 @@ searchHistoryEl.addEventListener('click',(event) => {
 
 function init() {
   openWeatherMapForecast();
-  searchHistoryRender()
+  searchHistoryRender();
+  showSpinner();
 }
 init();

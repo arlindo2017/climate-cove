@@ -1,23 +1,65 @@
-header,
-footer {
-  text-align: center;
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  background-image: url("../img/thunder-storm.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-attachment: fixed;
+  color: #e4eaec;
+  backdrop-filter: blur(5px);
+}
+a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #e4eaec;
+  opacity: 0.3;
+}
+
+.bi {
+  font-size: 24px;
+}
+
+nav h1 {
+  /* font-family: "playfair"; */
+  font-weight: 900;
+}
+
+#spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  visibility: visible;
 }
 
 .card {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  background-color: rgb(145, 131, 206, 0.6) !important;
+  color: #e4eaec;
 }
 
-section {
-  padding: 3px;
+.list-group-item {
+  background-color: rgb(145, 131, 206, 0.3) !important;
+  color: #e4eaec;
 }
 
-.card-body img {
+.card-body img,
+.card img {
   object-fit: scale-down;
   width: 100%;
   height: 100%;
+  max-height: 80px;
 }
 
-article {
-  text-align: bottom;
-  justify-content: bottom;
+.row {
+  margin: 0px;
+  padding: 0px;
+}
+
+footer {
+  text-align: center;
 }
