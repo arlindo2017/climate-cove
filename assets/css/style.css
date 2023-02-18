@@ -11,7 +11,6 @@ body {
   background-position-y: center;
   background-attachment: fixed;
   color: #e4eaec;
-  backdrop-filter: blur(5px);
 }
 a {
   font-weight: bold;
@@ -25,8 +24,12 @@ a {
 }
 
 nav h1 {
-  /* font-family: "playfair"; */
   font-weight: 900;
+  text-shadow: 2px 2px rgb(145, 131, 206, 0.5);
+}
+
+h4 {
+  text-shadow: 2px 2px rgb(145, 131, 206, 0.5);
 }
 
 #spinner {

@@ -153,7 +153,7 @@ function localStorageStringToArray() {
   } else {
       citySearchHistoryArray = JSON.parse(citySearchHistoryString);
       if (!citySearchHistoryArray.includes(citySearchString)) {
-          if (citySearchHistoryArray.length >= 5) {
+          if (citySearchHistoryArray.length >= 7) {
               citySearchHistoryArray.pop();
           }
           citySearchHistoryArray.unshift(citySearchString);

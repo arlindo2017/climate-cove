@@ -18,27 +18,27 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Us Climate Cove</title>
   </head>
-  <body>
-    <header>
+  <body class="container-lg">
+    <header >
       <div
-        class="text-center btn btn-secondary btn-large"
+        class="card"
         id="spinner"
-        value="Loading..."
       >
         <div class="spinner-border" role="status">
           <span class="visually-hidden"></span>
         </div>
-        <span>Loading...</span>
+        <span> Loading weather...</span>
       </div>
-
-      <nav class="container-fluid">
+      <nav >
         <h1>US CLIMATE COVE</h1>
       </nav>
 
       <!-- input-group  -->
-      <div class="container-fluid">
+      <div >
         <div class="input-group">
-          <i class="btn bi bi-search align-middle btn-dark disabled"> </i>
+          <i class="bi bi-building-fill btn btn-dark disabled align-middle btn-sm"></i>
+          
+          
           <input
             class="form-control form-inline d-flex justify-content-center md-form form-sm mt-0"
             id="city-search-input"
@@ -104,14 +104,14 @@
             <option value="WV">WV</option>
             <option value="WY">WY</option>
           </select>
-          <button class="btn btn-dark" id="city-search-btn" type="submit">
-            Search
+          <button class="btn btn-dark btn-sm" id="city-search-btn" type="submit">
+            <i class="bi bi-search align-middle"> </i>
           </button>
         </div>
       </div>
-      <br />
+     <br>
     </header>
-    <main class="row container-fluid">
+    <main class="row">
       <aside class="col-md-6 col-sm-12">
         <!-- side bar  -->
         <h4 id="city-name"></h4>
@@ -154,7 +154,7 @@
       </section>
     </main>
 
-    <footer class="row container-fluid"><a href="https://arlindo2017.github.io/arlindopinto-portfolio/"><h7>arlindo2017 </h7> <i class="bi bi-c-circle"></i></a</footer>
+    <footer><a href="https://arlindo2017.github.io/arlindopinto-portfolio/"><h7>arlindo2017&copy </h7></a</footer>
 
     <!-- load scripts last -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
