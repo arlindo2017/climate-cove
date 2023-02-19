@@ -116,22 +116,38 @@ var openWeatherMapForecast = function () {
                 forecastIconEl.classList.add('col');
                 forecastIconEl.src = "https://openweathermap.org/img/w/" + futureWeatherIcon+".png"
                 // 5 - Temp
-                var forecastTempEl = document.createElement('h2');
-                forecastTempEl.classList.add('col','display-6');
+                var forecastTempEl = document.createElement('h6');
+                forecastTempEl.classList.add('col');
                 forecastTempEl.textContent = Math.round(futureWeatherTemp) + "°";
+                var forecastTempIconEl = document.createElement('i');
+                forecastTempIconEl.classList.add('bi','bi-thermometer');
                 // 6- Wind
                 var forecastWindEl = document.createElement('div');
                 forecastWindEl.classList.add('col');
-                forecastWindEl = document.createElement('h7');
+                forecastWindEl = document.createElement('h6');
                 forecastWindEl.classList.add('col');
-                forecastWindEl.textContent = "Wind: " + futureWeatherWind + " MPH"
-                forecastHumidityEl = document.createElement('h7');
+            
+                forecastWindEl.textContent = futureWeatherWind + " mph "
+                var forecastWindIconEl = document.createElement('i');
+                forecastWindIconEl.classList.add('bi','bi-wind');
+                
+                // 7 Humidity
+                var forecastHumidityEl = document.createElement('h6');
                 forecastHumidityEl.classList.add('col');
-                forecastHumidityEl.textContent = "Humidity: " +futureWeatherHumidity + "%";
-                // 7- Add Components to HTML
+                forecastHumidityEl.textContent = futureWeatherHumidity + "% ";
+
+                var forecastHumidityIconEl = document.createElement('i');
+                forecastHumidityIconEl.classList.add('bi','bi-moisture');
+                
+                // 8- Add Components to HTML
                 forecastContainerEl.append( forecastCardEl);
                 forecastCardEl.append(forecastDateEl,forecastCardBody);
+                
                 forecastCardBody.append(forecastIconEl,forecastTempEl,forecastWindEl,forecastHumidityEl);
+
+                forecastTempEl.append(forecastTempIconEl);
+                forecastWindEl.append(forecastWindIconEl);
+                forecastHumidityEl.append(forecastHumidityIconEl);
                 hideSpinner();
             }       
     });
@@ -153,7 +169,7 @@ function localStorageStringToArray() {
   } else {
       citySearchHistoryArray = JSON.parse(citySearchHistoryString);
       if (!citySearchHistoryArray.includes(citySearchString)) {
-          if (citySearchHistoryArray.length >= 7) {
+          if (citySearchHistoryArray.length >= 8) {
               citySearchHistoryArray.pop();
           }
           citySearchHistoryArray.unshift(citySearchString);
