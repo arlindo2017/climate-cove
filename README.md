@@ -14,5 +14,5 @@ https://github.com/arlindo2017/climate-cove
 ## Skills on display
 - Click event functions
 - Local Storage
-- Bootstrap
-- Dayjs
+- Bootstrap CSS
+- Dayjs for date formatting

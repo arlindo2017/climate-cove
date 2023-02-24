@@ -62,6 +62,7 @@ var openWeatherMapForecast = function () {
           alert("Error: API couldnt not be reached \nMessage: " + currentWeatherResponse.statusText);
         }
         }).then(function (currentWeatherData) {
+            console.log("🚀 ~ file: script.js:65 ~ currentWeatherData:", currentWeatherData)
             var currentWeatherTemp = currentWeatherData.main.temp;
             var currentWeatherWind = currentWeatherData.wind.speed;
             var currentWeatherHumidity = currentWeatherData.main.humidity;
